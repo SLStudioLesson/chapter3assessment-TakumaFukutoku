@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.recipeapp.datahandler.CSVDataHandler;
 import com.recipeapp.datahandler.DataHandler;
+import com.recipeapp.model.Ingredient;
 import com.recipeapp.model.Recipe;
 
 public class RecipeUI {
@@ -37,6 +36,7 @@ public class RecipeUI {
 
                 switch (choice) {
                     case "1":
+                        displayRecipes();
                         break;
                     case "2":
                         break;
@@ -54,7 +54,34 @@ public class RecipeUI {
             }
         }
     }
-    //private void displayRecipes() {
-        //ArrayList<Recipe> recipes = dataHandler.readData();
-    //}
+
+    private void displayRecipes() {
+        try {
+            ArrayList<Recipe> recipes = dataHandler.readData();
+
+            if (recipes.isEmpty()) {
+                System.out.println("No recipes available.");
+                return;
+
+            } else {
+                System.out.println("Recipes:");
+                System.out.println("-----------------------------------");
+            }
+
+            for(Recipe recipe : recipes) {
+                System.out.println("Recip Name: " + recipe.getName());
+                
+                for(Ingredient ingredient : recipe.getIngredients()) {
+                    System.out.println("Main Ingredients: " + ingredient);
+                }
+                
+            
+                System.out.println("-----------------------------------");
+            }
+
+        } catch (IOException e) {
+            
+            System.out.println(e.getMessage());
+        }
+    }
 }
