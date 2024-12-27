@@ -39,6 +39,7 @@ public class RecipeUI {
                         displayRecipes();
                         break;
                     case "2":
+                        addNewRecipe();
                         break;
                     case "3":
                         break;
@@ -71,8 +72,13 @@ public class RecipeUI {
             for(Recipe recipe : recipes) {  //レシピデータの表示
                 System.out.println("Recip Name: " + recipe.getName());
                 System.out.print("Main Ingredients: ");
-                for(Ingredient ingredient : recipe.getIngredients()) {
-                    System.out.print((ingredient.getName()) + ",");
+                ArrayList<Ingredient> ingredients = recipe.getIngredients();    //材料のリスト
+
+                for(int i = 0; i < ingredients.size();i++) {    //for文のでループ
+                    System.out.print(ingredients.get(i).getName());
+                    if (i < ingredients.size() -1) {
+                        System.out.print(",");
+                    }
                 }
                 System.out.println();
                 System.out.println("-----------------------------------");
@@ -81,6 +87,37 @@ public class RecipeUI {
         } catch (IOException e) {
             
             System.out.println("Error reading file:" + e.getMessage());
+        }
+    }
+
+    private void addNewRecipe() {
+        try {
+            System.out.println("Adding a new recipe.");     //レシピ名入力
+            System.out.print("Enter recipe name: ");
+
+            String recipeName = reader.readLine();
+
+            ArrayList<Ingredient> ingredients = new ArrayList<>();  //材料を格納するリスト
+            String ingredientName;
+
+            System.out.println("Enter ingredients (type 'done' when finished):");
+
+            while (true) {
+                System.out.print("Ingredient: ");
+                ingredientName = reader.readLine();
+
+                if (ingredientName.equals("done")) {    //doneでループ終了
+                    break;
+                } else {
+                ingredients.add(new Ingredient(ingredientName));    //材料をリストに追加
+                }
+            }
+            Recipe newRecipe = new Recipe(recipeName, ingredients);     //インスタンス生成
+            dataHandler.writeData(newRecipe);
+            System.out.println("Recipe added successfully.");
+
+        } catch (IOException e) {
+            System.out.println("Failed to add new recipe: " + e.getMessage());
         }
     }
 }
