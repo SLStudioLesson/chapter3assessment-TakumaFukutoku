@@ -57,9 +57,9 @@ public class RecipeUI {
 
     private void displayRecipes() {
         try {
-            ArrayList<Recipe> recipes = dataHandler.readData();
+            ArrayList<Recipe> recipes = dataHandler.readData(); //読み込み
 
-            if (recipes.isEmpty()) {
+            if (recipes.isEmpty()) {    //存在しない場合
                 System.out.println("No recipes available.");
                 return;
 
@@ -68,20 +68,19 @@ public class RecipeUI {
                 System.out.println("-----------------------------------");
             }
 
-            for(Recipe recipe : recipes) {
+            for(Recipe recipe : recipes) {  //レシピデータの表示
                 System.out.println("Recip Name: " + recipe.getName());
-                
+                System.out.print("Main Ingredients: ");
                 for(Ingredient ingredient : recipe.getIngredients()) {
-                    System.out.println("Main Ingredients: " + ingredient);
+                    System.out.print((ingredient.getName()) + ",");
                 }
-                
-            
+                System.out.println();
                 System.out.println("-----------------------------------");
             }
 
         } catch (IOException e) {
             
-            System.out.println(e.getMessage());
+            System.out.println("Error reading file:" + e.getMessage());
         }
     }
 }

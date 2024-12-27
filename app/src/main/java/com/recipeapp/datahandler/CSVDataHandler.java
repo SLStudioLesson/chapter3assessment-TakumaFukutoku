@@ -29,8 +29,8 @@ public class CSVDataHandler implements DataHandler {
 
         ArrayList<Recipe> recipes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line = reader.readLine();
-            while (line != null) {
+            String line;
+            while ((line = reader.readLine())!= null) {
                 String[] items = line.split(",");//一行ごとの要素を分解して格納
                 ArrayList<Ingredient> ingredients = new ArrayList<>();
                 for(int i = 1; i < items.length; i++) { //材料をループさせる
