@@ -14,6 +14,23 @@ public class App {
             System.out.println("2. JSON");
             System.out.print("Select (1/2): ");
             String choice = reader.readLine();
+
+            //入力された値によっての条件分岐
+            if (choice.equals("1")) {   //1の場合
+                CSVDataHandler csvDataHandler = new CSVDataHandler();   //インスタンス生成
+                RecipeUI recipeUI = new RecipeUI(csvDataHandler);
+                recipeUI.displayMenu(); //displayMenuメソッドで表示
+            
+            } else if (choice.equals("2")) {    //2の場合
+                JSONDataHandler jsonDataHandler = new JSONDataHandler();    //インスタンス生成
+                RecipeUI recipeUI = new RecipeUI(jsonDataHandler);
+                recipeUI.displayMenu(); //displayMenuメソッドで表示
+
+            } else {    //それ以外の値
+                CSVDataHandler csvDataHandler = new CSVDataHandler();   //インスタンス生成
+                RecipeUI recipeUI = new RecipeUI(csvDataHandler);
+                recipeUI.displayMenu(); //displayMenuメソッドで表示
+            }
             
 
         } catch (Exception e) {

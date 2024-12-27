@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.recipeapp.datahandler.CSVDataHandler;
+import com.recipeapp.datahandler.DataHandler;
+import com.recipeapp.model.Recipe;
+
 public class RecipeUI {
     private BufferedReader reader;
     private DataHandler dataHandler;
@@ -50,4 +54,7 @@ public class RecipeUI {
             }
         }
     }
+    //private void displayRecipes() {
+        //ArrayList<Recipe> recipes = dataHandler.readData();
+    //}
 }
